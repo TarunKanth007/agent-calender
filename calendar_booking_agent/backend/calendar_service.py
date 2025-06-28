@@ -1,14 +1,12 @@
-import json
 import streamlit as st
 from datetime import datetime, timedelta
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
-# ✅ Correct way for JSON-formatted secrets
-creds_data = json.loads(st.secrets["GOOGLE_CREDENTIALS_FILE"])
+# ✅ Use dict directly from TOML section
+creds_data = dict(st.secrets["GOOGLE_CREDENTIALS_FILE"])
 GOOGLE_CALENDAR_ID = st.secrets["GOOGLE_CALENDAR_ID"]
 
-# Authenticate with Google
 credentials = service_account.Credentials.from_service_account_info(
     creds_data,
     scopes=["https://www.googleapis.com/auth/calendar"]
