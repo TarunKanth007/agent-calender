@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
-# Load credentials from Streamlit secrets
-creds_data = dict(st.secrets["GOOGLE_CREDENTIALS_FILE"])
+# ✅ Correct way for JSON-formatted secrets
+creds_data = json.loads(st.secrets["GOOGLE_CREDENTIALS_FILE"])
 GOOGLE_CALENDAR_ID = st.secrets["GOOGLE_CALENDAR_ID"]
 
 # Authenticate with Google
