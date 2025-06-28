@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 import streamlit as st
 from backend.calendar_service import book_event, check_free_slots
 from backend.nlp_utils import extract_intent_and_entities
