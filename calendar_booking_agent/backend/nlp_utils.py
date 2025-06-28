@@ -5,7 +5,6 @@ from datetime import datetime
 
 # Gemini setup
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-
 headers = {
     "authorization": f"Bearer {st.secrets['GEMINI_API_KEY']}",
     "content-type": "application/json"
