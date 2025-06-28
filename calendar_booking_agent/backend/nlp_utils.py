@@ -3,12 +3,8 @@ import json
 import requests
 from datetime import datetime
 
-# Gemini setup
-GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-headers = {
-    "authorization": f"Bearer {st.secrets['GEMINI_API_KEY']}",
-    "content-type": "application/json"
-}
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
 
 def extract_intent_and_entities(user_input: str):
     now = datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
@@ -35,7 +31,7 @@ If the user asks about availability, return:
   "date": "2025-06-28"
 }}
 
-Resolve relative time phrases like \"tomorrow afternoon\", \"next Friday\", or \"this weekend\" into exact UTC datetimes in ISO 8601 format.
+Resolve relative time phrases like "tomorrow afternoon", "next Friday", or "this weekend" into exact UTC datetimes in ISO 8601 format.
 Respond only with JSON and nothing else.
 """
 
@@ -48,7 +44,7 @@ Respond only with JSON and nothing else.
     }
 
     try:
-        response = requests.post(GEMINI_URL, headers=headers, json=payload)
+        response = requests.post(GEMINI_URL, headers={"Content-Type": "application/json"}, json=payload)
         response.raise_for_status()
         candidates = response.json().get("candidates", [])
         text = candidates[0]["content"]["parts"][0]["text"].strip() if candidates else ""
