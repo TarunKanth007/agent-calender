@@ -1,12 +1,10 @@
-import os
 import json
-import pytz
 import streamlit as st
 from datetime import datetime, timedelta
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
-# Load credentials from Streamlit secrets
+# Load credentials from Streamlit secrets (required)
 creds_data = json.loads(st.secrets["GOOGLE_CREDENTIALS_FILE"])
 GOOGLE_CALENDAR_ID = st.secrets["GOOGLE_CALENDAR_ID"]
 
